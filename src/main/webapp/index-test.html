@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="productModule">
+<head>
+<link rel="stylesheet" href="lib/bootstrap.min.css">
+    <script src = "lib/jquery-1.10.2.min.js"></script>
+    <script src = "lib/bootstrap.min.js"></script>
+	<script src = "lib/angular.min.js"></script>
+	<script src = "lib/angular-route.min.js"></script>
+	<script src = "module/module.js"></script>
+	<script src = "controller/productController.js"></script>
+	<script src = "service/productService.js"></script>
+	
+<script src="lib/Chart.min.js"></script>
+<script src="lib/angular-chart.js"></script>
+<script src = "lib/dirPagination.js"></script>
+</head>
+<body>
+<!-- 4 text field will be here
+	 SUBMIT button will be also here
+	 If some user submit 4 data it will directly goto controller
+	 there service will get called
+	 in service ajax call will be -->
+
+ <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">WebSiteName</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+       <!-- <li class="active"><a href="#">Home</a></li>  -->
+        <li><a href="#/route1">Page 1</a></li>
+		<li><a href="#/route2">Page 2</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div style = "width:50%;float:left;margin-left:20px">
+		<img src = "images/logo.jpg" align = "left" height = "100"  width = "180" />
+</div>
+
+<div class="col-lg-12  col-sm-12" ng-view></div>
+</body>
+</html>

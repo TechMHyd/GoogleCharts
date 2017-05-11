@@ -1,0 +1,95 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+ <servlet-name>springrest</servlet-name>
+ <servlet-class>
+  org.springframework.web.servlet.DispatcherServlet
+ </servlet-class>
+ <load-on-startup>1</load-on-startup>
+</servlet>
+
+<servlet>
+  <servlet-name>My Servlet</servlet-name>
+  <description>My servlet description.</description>
+  <servlet-class>SimpleExampleServlet</servlet-class>
+</servlet>
+
+<servlet>
+      <servlet-name>CSV Example</servlet-name>
+      <description>CsvDataSourceServlet</description>
+      <servlet-class>CsvDataSourceServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+      <servlet-name>AdvancedExampleServlet2</servlet-name>
+      <description>AdvancedExampleServlet2</description>
+      <servlet-class>AdvancedExampleServlet2</servlet-class>
+    </servlet>
+    
+    <servlet>
+      <servlet-name>AdvancedExampleServlet3</servlet-name>
+      <description>AdvancedExampleServlet3</description>
+      <servlet-class>AdvancedExampleServlet3</servlet-class>
+    </servlet>
+    
+    
+    <servlet>
+      <servlet-name>CarEventServlet</servlet-name>
+      <description>CarEventServlet</description>
+      <servlet-class>com.techmahindra.vehicletelemetry.chart.CarEventServlet</servlet-class>
+    </servlet>
+    
+    
+     <servlet>
+      <servlet-name>SqlDataSourceServlet</servlet-name>
+      <description>SqlDataSourceServlet</description>
+      <servlet-class>SqlDataSourceServlet</servlet-class>
+    </servlet>
+    
+
+
+<servlet-mapping>
+ <servlet-name>springrest</servlet-name>
+ <url-pattern>/</url-pattern>
+</servlet-mapping>
+
+<servlet-mapping>
+  <servlet-name>My Servlet</servlet-name>
+  <url-pattern>/simpleexample</url-pattern>
+</servlet-mapping>
+
+<servlet-mapping>
+      <servlet-name>CSV Example</servlet-name>
+      <url-pattern>/csv</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+      <servlet-name>AdvancedExampleServlet2</servlet-name>
+      <url-pattern>/advanced</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+      <servlet-name>AdvancedExampleServlet3</servlet-name>
+      <url-pattern>/advanced3</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+      <servlet-name>CarEventServlet</servlet-name>
+      <url-pattern>/cards</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+      <servlet-name>SqlDataSourceServlet</servlet-name>
+      <url-pattern>/sqlds</url-pattern>
+    </servlet-mapping>
+
+
+
+<welcome-file-list>  
+   <welcome-file>index.html</welcome-file>  
+  </welcome-file-list>
+ </web-app>

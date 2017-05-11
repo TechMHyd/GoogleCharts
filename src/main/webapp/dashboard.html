@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>VehicleTelemetry::Dashboard</title>
+    <!-- <meta http-equiv="Refresh" content="60; url="." /> -->   
+  <!--Load the AJAX API-->
+    <script type="text/javascript" src="loader.js"></script>
+    <script type="text/javascript">
+
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart','geochart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(init);
+
+  // Send the queries to the data sources.
+  function init() {
+
+	var query = new google.visualization.Query('cards?dataId=carsbycitymodel');
+	query.send(handleCarsByCityModelResponse);
+	
+    query = new google.visualization.Query('cards?dataId=aggressivedrivers');
+    query.send(handleAggDriversResponse);
+
+    query = new google.visualization.Query('cards?dataId=fuelefficientdrivers');
+    query.send(handleFuelDriversResponse);
+
+    query = new google.visualization.Query('cards?dataId=averagespeedbycity');
+    query.send(handleAverageSpeedByCityResponse);
+
+    query = new google.visualization.Query('cards?dataId=averagespeedbymodel');
+    query.send(handleAverageSpeedByModelResponse);
+   
+    
+  }
+  // Handle the advanced data source query response
+  function handleCarsByCityModelResponse(response) {
+    if (response.isError()) {
+      alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+      return;
+    }
+    var data = response.getDataTable();
+    var options_fullStacked = {
+    		title: 'Cars by City and Model',
+            isStacked: 'relative',
+            height: 300,
+            legend: {position: 'right', maxLines: 3},
+            vAxis: {
+              minValue: 0,
+              ticks: [0, .3, .6, .9, 1]
+            }
+          };
+
+    var options_stacked = {
+    		title: 'Cars by City and Model',
+            isStacked: true,
+            height: 400,
+            width: 350,
+            legend: {position: 'right', maxLines: 3},
+            hAxis: {
+                title: 'City',
+                minValue: 0/* ,
+                textStyle: { bold: true,fontSize: 12,color: '#4d4d4d'},
+                titleTextStyle: { bold: true, fontSize: 8, color: '#4d4d4d' } */
+              },
+              vAxis: {
+                title: 'Count'/* ,
+                textStyle: { fontSize: 14, bold: true, color: '#848484'},
+                titleTextStyle: { bold: true, fontSize: 8, color: '#848484'} */
+              }
+          };
+    
+    var chart = new google.visualization.AreaChart(document.getElementById('CarsByCityModel_div'));
+    chart.draw(data, options_stacked );
+  }
+
+//Handle the handleAggDriversResponse data source query response
+  function handleAggDriversResponse(response) {
+    if (response.isError()) {
+      alert('Error on handleAggDriversResponse query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+      return;
+    }
+    var data = response.getDataTable();
+    /* var parseData=JSON.parse(JSON.stringify(data));
+    console.log("Aggressive Drivers fetched:"+parseData); */
+    var options= {
+    	    title: 'Aggressive Drivers by City and Model',
+            height: 350,
+            width: 400,
+            legend: { position: 'right', maxLines: 3 },
+            bar: { groupWidth: '80%' },
+            isStacked: true,
+            hAxis: {
+                title: 'City',
+                minValue: 0/* ,
+                textStyle: { bold: true,fontSize: 12,color: '#4d4d4d'},
+                titleTextStyle: { bold: true, fontSize: 8, color: '#4d4d4d' } */
+              },
+              vAxis: {
+                title: 'Count'/* ,
+                textStyle: { fontSize: 14, bold: true, color: '#848484'},
+                titleTextStyle: { bold: true, fontSize: 8, color: '#848484'} */
+              }
+            }
+    var chart = new google.visualization.ColumnChart(document.getElementById('AggressiveDrivers_div'));
+    chart.draw(data, options );
+  }
+
+//Handle the handleAggDriversResponse data source query response
+  function handleFuelDriversResponse(response) {
+    if (response.isError()) {
+      alert('Error on handleFuelDriversResponse query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+      return;
+    }
+    var data = response.getDataTable();
+    var options={
+    	    title: 'Fuel Efficient Drivers by City and Model',
+    	    width: 400,
+            height: 350,
+            legend: { position: 'right', maxLines: 3 },
+            bar: { groupWidth: '80%' },
+            isStacked: true,
+            hAxis: {
+                title: 'City',
+                minValue: 0/* ,
+                textStyle: { bold: true,fontSize: 12,color: '#4d4d4d'},
+                titleTextStyle: { bold: true, fontSize: 8, color: '#4d4d4d' } */
+              },
+              vAxis: {
+                title: 'Count'/* ,
+                textStyle: { fontSize: 14, bold: true, color: '#848484'},
+                titleTextStyle: { bold: true, fontSize: 8, color: '#848484'} */
+              }
+        }
+    var chart = new google.visualization.ColumnChart(document.getElementById('FuelDrivers_div'));
+    chart.draw(data, options );
+  }
+
+//Handle the handleAverageSpeedByCityResponse data source query response
+  function handleAverageSpeedByCityResponse(response) {
+    if (response.isError()) {
+      alert('Error on handleAverageSpeedByCityResponse query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+      return;
+    }
+
+    var data = response.getDataTable();
+    var options={
+    	    title: 'Average Speed by City',
+    	    width: 400,
+            height: 350,
+            legend: { position: 'right', maxLines: 3 },
+            bar: { groupWidth: '80%' },
+            isStacked: true,
+            hAxis: {
+                title: 'City',
+                minValue: 0/* ,
+                textStyle: { bold: true,fontSize: 12,color: '#4d4d4d'},
+                titleTextStyle: { bold: true, fontSize: 8, color: '#4d4d4d' } */
+              },
+              vAxis: {
+                title: 'Count'/* ,
+                textStyle: { fontSize: 14, bold: true, color: '#848484'},
+                titleTextStyle: { bold: true, fontSize: 8, color: '#848484'} */
+              }
+       }
+    var chart = new google.visualization.ColumnChart(document.getElementById('AveargeSpeedByCity_div'));
+    chart.draw(data, options);
+  }
+
+//Handle the handleAverageSpeedByModelResponse data source query response
+  function handleAverageSpeedByModelResponse(response) {
+    if (response.isError()) {
+      alert('Error on handleAverageSpeedByModelResponse query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+      return;
+    }
+
+    var data = response.getDataTable();
+    var options={
+    	    title: 'Average Speed by Model',
+    	    width: 400,
+            height: 350,
+            legend: { position: 'right', maxLines: 3 },
+            bar: { groupWidth: '80%' },
+            isStacked: true,
+            hAxis: {
+                title: 'Model',
+                minValue: 0/* ,
+                textStyle: { bold: true,fontSize: 12,color: '#4d4d4d'},
+                titleTextStyle: { bold: true, fontSize: 8, color: '#4d4d4d' } */
+              },
+              vAxis: {
+                title: 'Count'/* ,
+                textStyle: { fontSize: 14, bold: true, color: '#848484'},
+                titleTextStyle: { bold: true, fontSize: 8, color: '#848484'} */
+              }
+         }
+    var chart = new google.visualization.ColumnChart(document.getElementById('AveargeSpeedByModel_div'));
+    chart.draw(data, options );
+  }
+  
+  </script>
+</head>
+<body >
+  <h1> Vehicle Telemetry Dashboard</h1>
+  <table>
+  <tr><td><div id="CarsByCityModel_div"/></td><td><div id="AggressiveDrivers_div"/></td><td><div id="FuelDrivers_div"/></td></tr>
+  <tr><td><div id="AveargeSpeedByCity_div"/></td><td><div id="AveargeSpeedByModel_div"/></td><td></div></td></tr>
+  
+  </table>
+  
+</body>
+</html>

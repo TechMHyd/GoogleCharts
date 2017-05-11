@@ -1,0 +1,176 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.techmahindra.googlecharts</groupId>
+  <artifactId>GoogleChartsWeb</artifactId>
+  <packaging>war</packaging>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>GoogleChartsWebApp</name>
+  <url>http://maven.apache.org</url>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		 <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+             <version>2.4.1</version>
+        </dependency>
+        <dependency>
+    		<groupId>com.google.code.gson</groupId>
+    		<artifactId>gson</artifactId>
+    		<version>2.2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+	
+		<dependency>
+		<groupId>com.h2database</groupId>
+		<artifactId>h2</artifactId>
+		<version>1.4.181</version>
+	</dependency>
+	
+	
+	<dependency>
+		<groupId>com.google</groupId>
+		<artifactId>visualization-datasource</artifactId>
+		<version>1.1.2</version>
+	</dependency>
+	
+	<!-- <dependency>
+		<groupId>com.google</groupId>
+		<artifactId>visualization-datasource-examples</artifactId>
+		<version>1.1.2</version>
+	</dependency> -->
+	
+	<dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+      <version>2.4</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.1.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google</groupId>
+      <artifactId>guava</artifactId>
+      <version>r07</version>
+    </dependency>
+    <dependency>
+      <groupId>com.ibm.icu</groupId>
+      <artifactId>icu4j</artifactId>
+      <version>4.0.1</version>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.opencsv</groupId>
+      <artifactId>opencsv</artifactId>
+      <version>1.8</version>
+    </dependency>
+    <!-- <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>2.5</version>
+      <scope>provided</scope>
+    </dependency> -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.6</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.easymock</groupId>
+      <artifactId>easymock</artifactId>
+      <version>2.5</version>
+      <scope>test</scope>
+    </dependency>
+    
+		
+	</dependencies>
+	<build>
+		<finalName>GoogleChartsWeb</finalName>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <configuration>
+                <outputDirectory>E:\jboss-eap-6.4\standalone\deployments</outputDirectory>
+            </configuration>
+        </plugin>
+		
+	<plugin>
+      <groupId>org.codehaus.mojo</groupId>
+      <artifactId>rpm-maven-plugin</artifactId>
+      <version>2.1</version>
+      <executions>
+        <execution>
+          <id>build-rpm</id>
+          <goals>
+            <goal>attached-rpm</goal>
+           </goals>
+         </execution>
+       </executions>
+       <configuration>
+         <group>Applications/Internet</group>
+         <copyright>EPL</copyright>
+         <requires>
+           <require>tomcat8</require>
+         </requires>
+         <mappings>
+           <mapping>
+             <directory>E:\jboss-eap-6.4\standalone\deployments\GoogleChartsWebApp.war</directory>
+             <sources>
+               <source>
+                 <location>./</location>
+               </source>
+             </sources>
+           </mapping>
+         </mappings>
+        </configuration>
+      </plugin>
+	  
+		</plugins>
+
+	</build>
+	<properties>
+		<spring.version>4.2.1.RELEASE</spring.version>
+		<jdk.version>1.8</jdk.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+  
+</project>

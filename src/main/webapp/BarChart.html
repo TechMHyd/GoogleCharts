@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>All Examples</title>
+  <!--Load the AJAX API-->
+    <script type="text/javascript" src="loader.js"></script>
+    <script type="text/javascript">
+
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(init);
+
+  // Send the queries to the data sources.
+  function init() {
+
+    query = new google.visualization.Query('advanced?tableId=planets&tq=select planet,mass');
+    query.send(handleAdvancedDsResponse);
+  }
+  // Handle the advanced data source query response
+  function handleAdvancedDsResponse(response) {
+    if (response.isError()) {
+      alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+      return;
+    }
+
+    var data = response.getDataTable();
+    var parseData=JSON.parse(JSON.stringify(data));
+    
+    console.log("parseData fetched:"+parseData);
+    var chart = new google.visualization.BarChart(document.getElementById('advanced_div'));
+    chart.draw(data, {width: 600, height: 400, is3D: true});
+  }
+  </script>
+</head>
+<body>
+  <h1> Hello! Data Source! </h1>
+  <h1> Advanced Data Source </h1>
+  A bar chart to show planetary masses.
+  The data is taken from the advanced data source.
+  <div id="advanced_div"></div>
+  
+</body>
+</html>

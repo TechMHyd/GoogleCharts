@@ -1,0 +1,21 @@
+table,#secondaryDiv,#midMidDiv
+{ 
+    margin-left: auto;
+    margin-right: auto;
+	border-collapse: collapse;
+}
+td {
+    border: 1px solid grey;
+	
+}
+th, #secondaryDivButton {
+	background-color: #195C7C;
+	color: white;
+}
+#cellPadding{
+	padding-left:15px;
+	padding-right:15px;
+}
+#header{
+color: white;
+}

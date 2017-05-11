@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>VehicleTelemetry::Dashboard</title>
+    <!-- <meta http-equiv="Refresh" content="60; url="." /> -->   
+  <!--Load the AJAX API-->
+    <!-- <script type="text/javascript" src="loader.js"></script> -->
+    <script type="text/javascript" src=" https://www.gstatic.com/charts/loader.js"></script>
+    
+    <script type="text/javascript">
+
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['geochart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(init);
+
+  // Send the queries to the data sources.
+  function init() {
+    query = new google.visualization.Query('cards?dataId=AllModelsAverageSpeedByCity');
+    query.send(handleAllModelsAverageSpeedByCityResponse);
+    
+  }
+  
+//Handle the handleAllModelsAverageSpeedByCityResponse data source query response
+  function handleAllModelsAverageSpeedByCityResponse(response) {
+    if (response.isError()) {
+      alert('Error on handleAllModelsAverageSpeedByCityResponse query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+      return;
+    }
+
+   var data = google.visualization.arrayToDataTable([
+                                                      ['City',   'modelcount', 'avgspeed'],
+                                                      ['Redmond',      46328,    1285.31],
+                                                      ['Bellevue',     61657,    181.76],
+                                                      ['Sammamish',    16029,     117.27],
+                                                      ['Seattle',     61903,     130.17],
+                                                    ]); 
+
+                                                    var options = {
+                                                      region: 'US',
+                                                      displayMode: 'regions', //'markers',
+                                                      colorAxis: {colors: ['green', 'blue']}
+                                                    };
+                                                    
+
+    //var data = response.getDataTable();
+    var parseData=JSON.parse(JSON.stringify(data));
+    console.log("US Data fetched:"+parseData);
+    
+    /* var options = {
+            region: 'US',
+            displayMode: 'markers',
+            colorAxis: {colors: ['green', 'blue']}
+          }; */
+    var chart = new google.visualization.GeoChart(document.getElementById('AllModelsAveargeSpeedByCity_div'));
+    chart.draw(data, options); 
+    
+  }
+  
+  </script>
+</head>
+<body >
+  <h1> Vehicle Telemetry Dashboard</h1>
+  <table>
+  <tr><td><div id ="AllModelsAveargeSpeedByCity_div"></div></td></tr>
+  
+  </table>
+  
+</body>
+</html>

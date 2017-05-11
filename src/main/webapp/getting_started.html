@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Getting Started Example</title>
+  <!--Load the AJAX API-->
+  <script type="text/javascript" src="loader.js"></script>
+  <script type="text/javascript">
+
+  //Load the Visualization API and the ready-made Google table visualization
+  //google.load('visualization', '1', {'packages':['table']});
+
+  // Set a callback to run when the API is loaded.
+  
+  // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(init);
+  
+  // Send the query to the data source.
+  function init() {
+
+    // Specify the data source URL.
+    var query = new google.visualization.Query('simpleexample');
+
+    // Send the query with a callback function.
+    query.send(handleQueryResponse);
+  }
+
+  // Handle the query response.
+  function handleQueryResponse(response) {
+    if (response.isError()) {
+      alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+      return;
+    }
+
+    // Draw the visualization.
+    var data = response.getDataTable();
+    var parseData=JSON.parse(JSON.stringify(data));
+    console.log("parseData2:"+parseData);
+    var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+    var options = {
+            width: 600,
+            height: 400,
+            legend: { position: 'top', maxLines: 3 },
+            bar: { groupWidth: '75%' },
+            isStacked: true,
+    		//hAxis: {minValue: 0}
+          };
+    
+    chart.draw(data, options);
+  }
+  </script>
+</head>
+<body>
+  <h1>Hello! Data Source!</h1>
+  A table chart that shows data taken from the simple data source.
+  <!--Div that will hold the visualization-->
+  <div id="chart_div"></div>
+</body>
+</html>

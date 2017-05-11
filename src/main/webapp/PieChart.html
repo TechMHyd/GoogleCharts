@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>All Examples</title>
+  <!--Load the AJAX API-->
+    <script type="text/javascript" src="loader.js"></script>
+    <script type="text/javascript">
+
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(init);
+
+  // Send the queries to the data sources.
+  function init() {
+    var query = new google.visualization.Query('simpleexample?tq=select name,population');
+    query.send(handleSimpleDsResponse);
+  }
+
+  // Handle the simple data source query response
+  function handleSimpleDsResponse(response) {
+    if (response.isError()) {
+      alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+      return;
+    }
+    var data = response.getDataTable();
+    var parseData=JSON.parse(JSON.stringify(data));
+    console.log("Parsed data:"+parseData);
+    var chart = new google.visualization.PieChart(document.getElementById('simple_div'));
+    chart.draw(data, {width: 600, height: 150, is3D: true});
+  }
+ 
+  </script>
+</head>
+<body>
+  <h1> Hello! Data Source! </h1>
+  A pie chart to show the population of a group of animals.
+  The data is taken from the simple data source.
+  <div id="simple_div"></div>
+</body>
+</html>
+
